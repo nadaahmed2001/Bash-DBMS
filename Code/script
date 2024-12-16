@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+
+select choice in "Create DB" "List Databases" "Connect to Databases" "Drop DB" "Exit"
+do
+case $choice in
+"Create DB")
+	echo "Creating database.."
+	./create_db
+	;;
+"List Databases")
+	echo "Listing database.."
+	./list_db
+	;;
+"Connect to Databases")
+	echo "Connecting to database.."
+	./connect_db
+	;;
+"Drop DB")	
+	echo "Drop database..:"
+	./drop_db
+	;;
+"Exit")
+	echo "Exit.."
+	break
+	;;
+esac
+done

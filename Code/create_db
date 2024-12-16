@@ -1,0 +1,30 @@
+#!/usr/bin/bash
+
+echo "Hello from create_db"
+
+while true
+do
+echo "Write your database name: "
+read dbname
+if [ -z $dbname ]
+then
+    echo "Database name can't be empty"
+    
+elif [ -d /home/nadaabutaleb/ITI/Bash/Project/DB/$dbname ]
+then
+    echo "Database with this name already exists"
+elif [[ $dbname =~ [^a-zA-Z0-9] ]]
+then
+    echo "Database name can contain only letters and numbers"
+
+elif [[ $dbname =~ ^[0-9] ]]
+then
+    echo "Database name can't start with a number"
+else
+    break
+fi
+done
+cd /home/nadaabutaleb/ITI/Bash/Project/DB-result
+mkdir $dbname
+echo "Database $dbname created successfully"
+cd - > /dev/null
