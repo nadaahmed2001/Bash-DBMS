@@ -8,26 +8,24 @@ echo
 cd ../DB-result
 
 array=(`ls -F | grep /`)
-
+# If database directory is empty
 if [ ${#array[@]} -eq 0 ]; then
   echo "there is no database to connect to..."
   exit 1 
 fi 
 
+# Print the databases menu
 select choice in ${array[*]}
 do
-if [ $REPLY -gt ${#array[*]} ]
+if [ $REPLY -gt ${#array[*]} ] # If choosed number gretter than the number of databases
 then 
-echo "
-$REPLY not on the menu
-"
-continue 
+echo "$REPLY not on the menu"
+continue
+
 else
 cd ../DB-result/${array[${REPLY}-1]}
-
-echo "
-...You Are connected to ${array[${REPLY}-1]}
-"
+DB_NAME=${array[${REPLY}-1]} # Save the selected database name to use it in other scripts
+echo "...You Are connected to ${array[${REPLY}-1]}"
 break
 fi
 done
@@ -38,38 +36,49 @@ do
 case $choice in 
 Create_Table )
         echo "Creating table..."
+        export DB_NAME
         /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/create_tb
         ;;
 List_Tables ) 
         echo "List_Table..."
-         source /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/list_tb
+        export DB_NAME
+        /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/list_tb 
           ;;
 
 Drop_table )
   echo "Drop_table..."
-     source /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/drop_tb
+  export DB_NAME
+       /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/drop_tb 
         ;;
                  
 insert_table )
         echo "insert_table..."
-     source /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/insert_tb
+        export DB_NAME
+      /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/insert_tb 
         ;;
 select_table )
          echo "select_table..."
-     source /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/select_tb
+         export DB_NAME
+     /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/select_tb 
         ;;
 
 delete_from_tb )
     echo "delete_from_tb..."
-     source /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/delete_from_tb
-        ;
+    export DB_NAME
+     /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/delete_from_tb 
+        ;;
 update_table )
         echo "update_table..."
-         source /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/update_tb
+        export DB_NAME
+         /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/update_tb 
         ;;
 insert_into_tb )
         echo "insert_into_tb..."
-         source /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/insert_into_tb
+        export DB_NAME
+         /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/insert_into_tb 
+        ;;
+*)
+        echo "Invalid Choice"
         ;;
 esac
 done

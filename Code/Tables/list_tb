@@ -1,3 +1,15 @@
 #!/usr/bin/bash
 
 echo "Hello from list_tb"
+echo "Listing tables of database: $DB_NAME"
+
+# echo "DB_NAME: $DB_NAME"
+# echo "DB_PATH: /home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME"
+
+# Check if there is no tables
+if [ -z "$(ls /home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME)" ]; then
+    echo "No tables found"
+else
+    echo "Tables:"
+    ls /home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME
+fi

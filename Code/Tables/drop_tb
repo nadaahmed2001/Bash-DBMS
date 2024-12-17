@@ -1,3 +1,19 @@
 #!/usr/bin/bash
 
 echo "Hello from drop_tb"
+
+echo "Enter table name to drop:"
+while true
+do
+read table_name
+if [ -f "/home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME/$table_name" ];
+then
+    rm "/home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME/$table_name"
+    echo "Table dropped successfully"
+break
+
+else
+    echo "Table not found, please enter a valid table name: "
+    continue
+fi
+done
