@@ -5,19 +5,19 @@ do
 case $choice in
 "Create DB")
 	echo "Creating database.."
-	./create_db
+	./Databases/create_db
 	;;
 "List Databases")
 	echo "Listing database.."
-	./list_db
+	./Databases/list_db.sh
 	;;
 "Connect to Databases")
 	echo "Connecting to database.."
-	./connect_db
+	./Databases/connect_db.sh
 	;;
 "Drop DB")	
 	echo "Drop database..:"
-	./drop_db
+	./Databases/drop_db.sh
 	;;
 "Exit")
 	echo "Exit.."

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-cd /home/rahma/Documents/test/DATA
+cd ../DB-result
 
 
 array=(`ls -F | grep /`)

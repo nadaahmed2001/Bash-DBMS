@@ -1,12 +1,12 @@
 #!/usr/bin/bash
-PS3=" Type Your Table Number To Drop : "
-cd /home/rahma/Documents/test/DATA
+
+cd ../DB-result
 
 array=(`ls -F | grep /`)
 
 if [ ${#array[@]} -eq 0 ]; then
-  echo "there is no database to delete."
-  exit 1 
+  echo "There is no database to delete."
+  exit 1
 fi 
 
 echo
@@ -24,15 +24,13 @@ $REPLY not on the menu
 continue 
 else
 rm -r ${array[${REPLY}-1]}
+cd -
 echo "
 ...Your ${array[${REPLY}-1]} DB Deleted successfully...
 " 
-break 2
+break
 fi
 done
-
-
-
 
 
 cd - &> ~/../../dev/null

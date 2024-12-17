@@ -10,9 +10,11 @@ if [ -z $dbname ]
 then
     echo "Database name can't be empty"
     
-elif [ -d /home/nadaabutaleb/ITI/Bash/Project/DB/$dbname ]
+elif [ -d ../DB-result/$dbname ]
+
 then
     echo "Database with this name already exists"
+
 elif [[ $dbname =~ [^a-zA-Z0-9] ]]
 then
     echo "Database name can contain only letters and numbers"
@@ -20,6 +22,7 @@ then
 elif [[ $dbname =~ ^[0-9] ]]
 then
     echo "Database name can't start with a number"
+
 else
     break
 fi
