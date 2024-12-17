@@ -1,0 +1,3 @@
+id:int:pk
+name:int
+age:int

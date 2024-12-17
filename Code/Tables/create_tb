@@ -44,3 +44,118 @@ do
 done
 
 
+# Insert table fields or metadata
+
+while true
+do
+    echo "Enter number of columns:"
+    read num_of_columns
+    # ---------------------------------- Number of columns validation ----------------------------------
+    case $num_of_columns in
+    # Empty number of columns
+    "")
+        echo "Number of columns cannot be empty"
+        continue
+        ;;
+    # Number of columns contain space
+    *" "*)
+        echo "Number of columns cannot contain space"
+        continue
+        ;;
+    # Number of columns contain special characters
+    *[^0-9]*)
+        echo "Number of columns must be a number"
+        continue
+        ;;
+    # Number of columns less than 1
+    *)
+        if [ $num_of_columns -lt 1 ];
+        then
+            echo "Number of columns must be greater than 0"
+            continue
+        else
+            break
+        fi
+        ;;
+    esac
+done
+touch "/home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME/${table_name}metadata"
+flag=0 # Flag to check if primary key already exists
+
+# Insert columns metadata
+for ((i = 0; i < $num_of_columns; i++)); do
+    while true; do
+        echo "Enter column $((i + 1)) name:"
+        read column_name
+
+        # ---------------------------------- Column name validation ----------------------------------
+        case $column_name in
+        "") # Empty column name
+            echo "Column name cannot be empty."
+            continue
+            ;;
+        *" "*) # Spaces in column name
+            echo "Column name cannot contain spaces."
+            continue
+            ;;
+        *[^a-zA-Z0-9]*) # Special characters in column name
+            echo "Column name cannot contain special characters."
+            continue
+            ;;
+        [0-9]*) # Column name starts with number
+            echo "Column name cannot start with a number."
+            continue
+            ;;
+        *)
+            # Check if column already exists in metadata
+            if grep -q "^$column_name:" "/home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME/${table_name}metadata"; then
+                echo "Column name '$column_name' already exists. Please choose another name."
+                continue
+            else
+                # ---------------------------------- Column type validation ----------------------------------
+                while true; do
+                    echo "Enter column $((i + 1)) type (int/str):"
+                    read column_type
+
+                    case $column_type in
+                    int | str) # Valid types: int or str
+                        # Handle primary key assignment
+                        if [ $flag -eq 0 ]; then
+                            while true; do
+                                echo "Is this column a primary key? (y/n)"
+                                read primary_key
+                                case $primary_key in
+                                [yY]*) # Assign as primary key
+                                    echo "$column_name:$column_type:pk" >>"/home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME/${table_name}metadata"
+                                    flag=1
+                                    break
+                                    ;;
+                                [nN]*) # Not a primary key
+                                    echo "$column_name:$column_type" >>"/home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME/${table_name}metadata"
+                                    break
+                                    ;;
+                                *)
+                                    echo "Invalid input. Please enter 'y' for yes or 'n' for no."
+                                    continue
+                                    ;;
+                                esac
+                            done
+                                
+                        else
+                            # If primary key already exists
+                            echo "$column_name:$column_type" >>"/home/nadaabutaleb/ITI/Bash/Project/DB-result/$DB_NAME/${table_name}metadata"
+                        fi
+                        echo "Column '$column_name' added successfully."
+                        break
+                        ;;
+                    *) # Invalid column type
+                        echo "Invalid column type. Please enter 'int' or 'str'."
+                        ;;
+                    esac
+                done
+                break
+            fi
+            ;;
+        esac
+    done
+done
