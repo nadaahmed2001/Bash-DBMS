@@ -1,23 +1,27 @@
 #!/usr/bin/bash
-
+echo "------------------ Main Menu ------------------"
 select choice in "Create DB" "List Databases" "Connect to Databases" "Drop DB" "Exit"
 do
 case $choice in
 "Create DB")
 	echo "Creating database.."
-	./Databases/create_db
+	~/ITI/Bash/Project/Code/Databases/create_db
+	
+
 	;;
 "List Databases")
 	echo "Listing database.."
-	./Databases/list_db.sh
+	~/ITI/Bash/Project/Code/Databases/list_db.sh
+	
 	;;
 "Connect to Databases")
 	echo "Connecting to database.."
-	./Databases/connect_db.sh
+	~/ITI/Bash/Project/Code/Databases/connect_db.sh
+	
 	;;
 "Drop DB")	
 	echo "Drop database..:"
-	./Databases/drop_db.sh
+	~/ITI/Bash/Project/Code/Databases/drop_db.sh
 	;;
 "Exit")
 	echo "Exit.."

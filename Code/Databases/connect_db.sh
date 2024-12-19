@@ -5,7 +5,7 @@ echo
 echo "Select Your Database number from menu"
 echo
 
-cd ../DB-result
+cd ~/ITI/Bash/Project/DB-result
 
 array=(`ls -F | grep /`)
 # If database directory is empty
@@ -65,7 +65,7 @@ select_table )
 delete_from_tb )
     echo "delete_from_tb..."
     export DB_NAME
-     /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/delete_from_tb 
+     /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/delete_from_tb.sh
         ;;
 update_table )
         echo "update_table..."
@@ -75,7 +75,7 @@ update_table )
 insert_into_tb )
         echo "insert_into_tb..."
         export DB_NAME
-         /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/insert_into_tb 
+         /home/nadaabutaleb/ITI/Bash/Project/Code/Tables/insert_into_tb.sh
         ;;
 *)
         echo "Invalid Choice"
